@@ -1,6 +1,6 @@
 # ⚡ Proyecto Bootcamp Energía: Planeación de Demanda Energética
 
-Este proyecto forma parte del **Bootcamp de Ciencia de Datos en Energía**, y tiene como objetivo desarrollar un sistema de **planeación y predicción de la demanda energética en Colombia**, integrando análisis de datos, consultas SQL y modelado predictivo en Python.
+Este proyecto forma parte del **Bootcamp de Análisis de Datos de Talento Tech MinTIC**, y tiene como objetivo desarrollar un sistema de **planeación y predicción de la demanda energética en Colombia**, integrando análisis de datos, consultas SQL y modelado predictivo en Python.
 
 ---
 
@@ -27,9 +27,7 @@ El propósito es apoyar la **toma de decisiones informadas** sobre generación, 
 - **Librerías Python:**  
   - `pandas`, `numpy` → Análisis y manipulación de datos  
   - `matplotlib`, `seaborn` → Visualización  
-  - `scikit-learn` → Modelado predictivo  
-  - `sqlalchemy` → Conexión y manejo de bases de datos  
-  - `python-dotenv` → Manejo de variables de entorno (opcional)  
+  - `scikit-learn`, `xgboost`, `prophet` → Modelado predictivo   
 - **Entorno:** Jupyter Notebook  
 - **Base de datos / Fuente:** Datos provenientes de **[SIMEM](https://www.simem.co/)** (Sistema de Información Minero Energético Colombiano)
 
@@ -43,7 +41,6 @@ Proyecto_Bootcamp_Energia/
 ├── data/               # Datos descargados o transformados (raw/processed)
 ├── notebooks/          # Jupyter Notebooks de análisis y modelado
 ├── sql/                # Consultas SQL utilizadas (.sql)
-├── src/                # Funciones auxiliares y scripts de procesamiento
 ├── models/             # Modelos entrenados o serializados (.pkl, .joblib)
 ├── results/            # Gráficos, reportes y resultados del modelado
 ├── docs/               # Documentación adicional (opcional)
@@ -60,57 +57,15 @@ Proyecto_Bootcamp_Energia/
    git clone https://github.com/usuario/Proyecto_Bootcamp_Energia.git
    cd Proyecto_Bootcamp_Energia
    ```
-
-2. **Instalar dependencias**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configurar variables de entorno**  
-   Crea un archivo `.env` (no subir al repositorio) con las credenciales/URIs necesarias para conectarte a la base de datos o APIs, por ejemplo:
-   ```
-   DB_USER=tu_usuario
-   DB_PASS=tu_contraseña
-   DB_HOST=host_de_bd
-   DB_NAME=nombre_bd
-   ```
-
-4. **Ejecutar notebooks o scripts**
-   ```bash
-   jupyter notebook
-   ```
-   o ejecutar scripts desde `src/`:
-   ```bash
-   python src/etl.py
-   python src/train_model.py
-   ```
-
-5. **Conectar a la base de datos SIMEM**  
-   - Si usas descargas directas desde el portal, guarda los CSV en `data/raw/`.  
-   - Si trabajas con una copia local o exportada a una BD, usa `sqlalchemy` o tu conector preferido para ejecutar las consultas en `sql/`.
-
----
-
-## 🔍 Ejemplo de consulta SQL (simple)
-
-```sql
--- Total de consumo por año y por departamento (ejemplo)
-SELECT
-  departamento,
-  EXTRACT(YEAR FROM fecha) AS año,
-  SUM(consumo_mwh) AS consumo_anual_mwh
-FROM consumo_energia
-GROUP BY departamento, EXTRACT(YEAR FROM fecha)
-ORDER BY departamento, año;
-```
-
+   
 ---
 
 ## 📈 Resultados Esperados
 
 - Limpieza y estructuración de datos energéticos de Colombia.  
-- Visualización de patrones de consumo por región, hora y tipo de energía.  
-- Modelos de predicción de demanda a corto y mediano plazo (p. ej. regresión, series temporales).  
+- Visualización de patrones de consumo por región, hora y tipo de energía.
+- Análisis de la capacidad de generación por tipo de energía.  
+- Modelos de predicción de demanda a mediano plazo (p. ej. regresión, series temporales).  
 - Informe final con hallazgos, métricas de modelo (MAE, RMSE) y recomendaciones para planeación.
 
 ---
@@ -119,11 +74,11 @@ ORDER BY departamento, año;
 
 Proyecto desarrollado por el equipo del **Bootcamp Energía**:
 
-- **Santiago Arboleda**
 - **Julián Caro**  
 - **Liliana Correa**
+- **Lina Ramírez**
 - **Yan Hoyos**  
-- **Lina Ramírez**  
+- **Santiago Arboleda**
 
 
 ---
@@ -143,15 +98,11 @@ Por favor añade issues para errores o propuestas grandes.
 ## 📬 Contacto
 
 **Autores:** Contactar a cualquiera de los autores  
-**GitHub:** [@tu_usuario](https://github.com/tu_usuario)  
-**Email:** [tu.email@ejemplo.com]
+**GitHub:** [@jmauriciocaro](https://github.com/jmauriciocaro)  
+**GitHub:** [@liliana1411](https://github.com/liliana1411)  
+**GitHub:** [@linaramirezbootcamp-dot](https://github.com/linaramirezbootcamp-dot)  
+**GitHub:** [@seyanhc](https://github.com/seyanhc)
+**GitHub:** [@santiagoarbolpiedra](https://github.com/santiagoarbolpiedra)  
 
 ---
 
-## 📄 Licencia
-
-Indica aquí la licencia deseada (por ejemplo MIT). Si no tienes una preferencia, puedo sugerir una plantilla.
-
----
-
-> “Holi” ⚙️
