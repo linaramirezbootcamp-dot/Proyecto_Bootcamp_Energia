@@ -101,7 +101,7 @@ Por favor añade issues para errores o propuestas grandes.
 **GitHub:** [@jmauriciocaro](https://github.com/jmauriciocaro)  
 **GitHub:** [@liliana1411](https://github.com/liliana1411)  
 **GitHub:** [@linaramirezbootcamp-dot](https://github.com/linaramirezbootcamp-dot)  
-**GitHub:** [@seyanhc](https://github.com/seyanhc)
+**GitHub:** [@seyanhc](https://github.com/seyanhc)  
 **GitHub:** [@santiagoarbolpiedra](https://github.com/santiagoarbolpiedra)  
 
 ---
