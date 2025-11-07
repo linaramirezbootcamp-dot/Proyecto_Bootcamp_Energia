@@ -1,1 +1,101 @@
-La idea es subir acá cualquier documentación adicional utilizada.
+Datos y extracción
+La fuente declarada es SIMEM, con opción de CSV en data/raw o conexión mediante SQLAlchemy y consultas en sql/.​
+Se requiere detallar tablas/catálogos, cobertura temporal, granularidad y controles de calidad para reproducibilidad.​
+
+¿Qué tablas o datasets de SIMEM usarás (nombres/catálogos), con cobertura temporal, unidad (MWh, kWh), zona horaria y frecuencia (horaria/diaria/mensual)?​
+tabla 1 Generación Real Estimada de Energía: Generación Real y Programada en las Plantas de Generación, desde el 01/01/2013 hasta el 10 de octubre de 2025. Con datos de Generación Real Estimada Diaria 
+en Kwh y Fecha de la generación
+
+¿Usarás datos exógenos (clima, calendario, precios, festivos, PIB) y de dónde provienen si aplica?​
+tabla 1 Generación Real Estimada de Energía: Se usaran datos de días festivos de Colombia
+
+¿El pipeline será por descargas CSV, por conexión a base de datos o mixto, y cómo se parametrizarán credenciales (.env)?​
+
+
+¿Qué validaciones de calidad aplicarás (nulos, outliers, duplicados, huecos de fechas, cambios de TZ, unidades)?​
+
+
+
+¿Cómo versionarás datasets procesados (nomenclatura en data/processed y control de hashes/fechas)?​
+
+Variable objetivo y granularidad
+Definir con precisión la variable objetivo, horizonte y frecuencia evita ambigüedad de métricas y protocolos de validación en series de tiempo.​
+Tu README sugiere demanda nacional, pero se puede segmentar por región, hora o tipo de energía según disponibilidad.​
+
+¿Cuál será la variable objetivo exacta (por ejemplo, demanda total MWh) y su granularidad (horaria/diaria/mensual) y ámbito (nacional/departamento/mercado)?​
+
+¿Cuál es el horizonte de predicción requerido para decisión (p. ej., 24–168 horas, 1–3 meses, 1 año)?​
+
+¿Se agregará o desagregará la serie (por región o tipo de energía) y habrá modelo único o por segmento?​
+
+Partición y validación
+Para series de tiempo, se recomiendan particiones temporales y backtesting con orígenes rodantes y métricas consistentes entre pliegues.​
+El éxito debe compararse contra un baseline claro y validarse con datos no vistos para generalización.​
+
+¿Qué esquema de split usarás (train/val/test con fechas explícitas) y cuántos cortes de backtesting?​
+
+¿Cuál será el baseline inicial (naive de persistencia, seasonal naive, promedio móvil) para calcular skill?​
+
+¿Qué controles contra fuga de información aplicarás en ingeniería de variables y escalamiento?​
+
+Modelado y métricas
+Se sugiere evaluar modelos clásicos de series y ML, comparando con métricas técnicas pertinentes al negocio energético.​
+Tu stack incluye scikit-learn y opciones de notebooks/scripts para entrenamiento reproducible.​
+
+¿Qué candidatos probarás: SARIMA/Prophet/TBATS, bosques/XGBoost, redes LSTM/TemporalFusion, u otros?​
+
+¿Qué features exógenas y calendáricas incluirás (festivos, clima, lags, ventanas, interacciones) y qué normalizaciones aplicarás?​
+
+¿Qué métricas reportarás: MAE, RMSE, MAPE/sMAPE, cobertura de intervalos, y por qué son relevantes para operación?​
+
+¿Qué protocolo de validación usarás (TimeSeriesSplit, walk-forward) y con qué ventanas de entrenamiento?​
+
+Optimización y robustez
+La guía pide optimización de hiperparámetros y validación con datos nuevos, además de análisis prescriptivo basado en resultados.​
+Define costos computacionales y criterios de parada para eficiencia práctica.​
+
+¿Qué estrategia de tuning aplicarás (grid, aleatoria, bayesiana) y con qué límites de tiempo/CPU/GPU?​
+
+¿Cómo probarás robustez: periodos anómalos, sensibilidad por segmento, estabilidad temporal, análisis de residuales?​
+
+¿Qué recomendaciones prescriptivas derivarás (p. ej., umbrales de alerta, escenarios de despacho, gestión de picos)?​
+
+Integración y automatización
+Se requiere integrar el modelo en una interfaz utilizable (dashboard o API) y automatizar ingesta, scoring y actualización.​
+Tu repo contempla Streamlit/Looker, notebooks y scripts src/etl.py y src/train_model.py.​
+
+¿El entregable será un dashboard (Streamlit/Looker) y/o un endpoint API, y qué KPIs mostrará (demanda pronosticada, error, bandas)?​
+
+¿Qué frecuencia de actualización tendrá el pipeline y cómo se orquestará (cron, make, Airflow/lightweight DAG)?​
+
+¿Cómo manejarás logging, monitoreo básico y registro de predicciones para auditoría?​
+
+Entregables y presentación
+El PDF debe tener portada, introducción, desarrollo y resultados, más código fuente, notebooks y herramienta de visualización, siguiendo nomenclatura de entrega.​
+Confirma medio, plazo y estructura final para alinear el repositorio.​
+
+¿Nombre exacto del PDF y estructura de secciones que incluiremos, además de anexos técnicos?​
+
+¿Dónde alojarás el código y modelos (branch/tag, models/*.pkl) y cómo documentaremos ejecución en README?​
+
+¿Cuál es la fecha/hora límite y el medio de entrega (Moodle) confirmados por la convocatoria?​
+
+Cronograma y equipo
+El documento evalúa contenido, aplicación, análisis, presentación y trabajo en equipo, por lo que conviene asignar responsables por hito.​
+Tu README lista integrantes; falta mapear roles técnicos y dependencias.​
+
+¿Quién lidera datos/ETL, modelado, validación, dashboard/API, y documentación/presentación?​
+
+¿Cuál es el cronograma por misiones con entregables intermedios y criterios de “hecho”?​
+
+Riesgos, ética y sostenibilidad
+La evaluación valora la aplicación práctica y la calidad analítica, por lo que deben anticiparse sesgos, privacidad, seguridad y reproducibilidad.​
+Define planes de mitigación y lineamientos de uso responsable en el contexto de transición justa.​
+
+¿Qué riesgos técnicos/datos identificas (sesgo regional, cambios de patrón, huecos de datos, fugas) y cómo los mitigarás?​
+
+¿Cómo garantizarás reproducibilidad (versionado de datos/modelos, seeds, requirements.txt, .env.example)?​
+
+¿Qué licencia aplicarás al repositorio y cuáles son las restricciones de uso de datos SIMEM?​
+
+Cuando compartas estas respuestas, se arma el borrador del informe y se actualiza el repo con la estructura final, scripts, métricas y dashboard de acuerdo con los criterios de entrega.
