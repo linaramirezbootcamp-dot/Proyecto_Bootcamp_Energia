@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from prophet import Prophet
 from prophet.diagnostics import cross_validation, performance_metrics
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import joblib 
 
 # Cargar y preparar datos
 df = pd.read_csv('data/Generacion.csv')
@@ -47,6 +48,10 @@ modelo = Prophet(
     seasonality_mode='multiplicative'
 )
 modelo.fit(df_prophet)
+
+# Guardar modelo
+MODEL_PATH = os.path.join('models', 'modelo_prophet_generacion.joblib')
+joblib.dump(modelo, MODEL_PATH)
 
 # Predicción futura
 dias_futuros = 365
